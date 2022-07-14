@@ -1,0 +1,29 @@
+{
+  "name": "rick-and-morty-02",
+  "version": "1.0.0",
+  "description": "Backend API de personagens da serie animada Rick and More com conexão ao frontend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index",
+    "dev": "nodemon src/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasSSDK/Rick-and-Morty-02.git"
+  },
+  "author": "Lucas SS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucasSSDK/Rick-and-Morty-02/issues"
+  },
+  "homepage": "https://github.com/LucasSSDK/Rick-and-Morty-02#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "index": "^0.4.0",
+    "mongoose": "^6.4.4",
+    "nodemon": "^2.0.19",
+    "swagger-ui-express": "^4.4.0"
+  }
+}

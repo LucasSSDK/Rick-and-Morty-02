@@ -4,6 +4,9 @@ const cors = require('cors');
 
 const connectToDatabase = require('./database/database');
 
+const userRoute = require("./users/users.route");
+
+
 const port = process.env.PORT || 3001;
 
 // const swaggerRoute = require(//rota do swagger)
@@ -16,6 +19,8 @@ app.use(express.json());
 app.use(cors());
 
 connectToDatabase();
+
+app.use("/users", userRoute);
 
 // app.use('/api');
 

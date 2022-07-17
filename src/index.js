@@ -9,8 +9,8 @@ const userRoute = require("./users/users.route");
 
 const port = process.env.PORT || 3001;
 
-// const swaggerRoute = require(//rota do swagger)
-// ;
+const swaggerRoute = require("./swagger/swagger.route")
+;
 
 const app = express();
 
@@ -22,7 +22,7 @@ connectToDatabase();
 
 app.use("/users", userRoute);
 
-// app.use('/api');
+app.use('/api-docs', swaggerRoute);
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);

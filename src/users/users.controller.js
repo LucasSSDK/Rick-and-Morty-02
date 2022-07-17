@@ -19,15 +19,26 @@ const createUser = async (req, res) => {
     return res.status(400).send({message: "Email de Usuario já existe!"});
    }
 
-   const user = await userService.createUser(req.body).catch((error) => console.log(error));
+   const user = await userService.createUser(req.body)
+   .catch((error) => console.log(error));
 
    if (!user) {
-    return res.status(500).send({message: "Erro ao criar"})
+    return res.status(500).send({message: "Erro ao criar/ tente novamente mais tarde!"})
    }
 
    res.status(201).send(user);
 };
 
+const findAllUsers = async (req, res) => {
+    const users = await userService.findAllUsers();
+
+    if(users.length == 0) {
+        return res.status(206).send({ message: "Não existem usuarios cadastrados"})
+    }
+
+    res.send(users)
+}
 module.exports = {
     createUser,
+    findAllUsers
 }

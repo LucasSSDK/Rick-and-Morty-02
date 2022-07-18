@@ -6,25 +6,96 @@
     "version": "1.0.0"
   },
   "servers": [
-    {
-      "url": "http://localhost:3001/",
-      "description": "Url de teste"
-    },
+   
     {
       "url": "http://localhost:3001/",
       "description": "Url de teste"
     }
   ],
   "paths": {
-    "/personagens/": {
-      "get": {},
-      "post": {}
-    },
-    "/personagens/{id}": {
-      "get": {},
-      "put": {},
-      "delete":{}
+    "/users/": {
+      "post": {
+        "sumary": "Crie um novo usuario",
+        "description": "Rota responsavel por criar um usuario",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "User": {
+                  "value": {
+                    "name": "Lucas Santos",
+                    "username": "lsantos",
+                    "email": "lsantos@gmail.com",
+                    "password": "123456",
+                    "avatar": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Algum campo obrigatorio não foi preenchido ou usuario existente"
+          },
+          "500": {
+            "description": "Erro ao criar usuario tente novamente mais tarde!"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "sumary": "Exibe todos os usuarios",
+        "description": "Rota responsavel por exibir todos os usuarios",
+        "tags":["Users"],
+        "responses":{
+          "206": {
+            "description": "Não existe usuarios cadastrados!"
+          },
+          "200": {
+            "description": "Ok",
+            "content": {
+              "aplication/json":{
+                "schema": {
+                  "type": "array",
+                  "itens": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
-
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "username": { "type": "string" },
+          "email": { "type": "string" },
+          "password": { "type": "string" },
+          "avatar": { "type": "string" }
+        }
+      }
+    }
   }
 }

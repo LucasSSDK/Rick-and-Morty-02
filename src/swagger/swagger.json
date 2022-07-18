@@ -6,7 +6,6 @@
     "version": "1.0.0"
   },
   "servers": [
-   
     {
       "url": "http://localhost:3001/",
       "description": "Url de teste"
@@ -62,15 +61,15 @@
       "get": {
         "sumary": "Exibe todos os usuarios",
         "description": "Rota responsavel por exibir todos os usuarios",
-        "tags":["Users"],
-        "responses":{
+        "tags": ["Users"],
+        "responses": {
           "206": {
             "description": "Não existe usuarios cadastrados!"
           },
           "200": {
             "description": "Ok",
             "content": {
-              "aplication/json":{
+              "aplication/json": {
                 "schema": {
                   "type": "array",
                   "itens": {

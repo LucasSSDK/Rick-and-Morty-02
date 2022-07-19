@@ -54,29 +54,55 @@ const updatePerson = async (req, res) => {
     });
   }
 
-  const upPerson = await (PersonService.updatePerson(id, updatedPerson));
+  const upPerson = await PersonService.updatePerson(id, updatedPerson);
 };
 
 const deletePerson = async (req, res) => {
-    const id = parseInt(req.params.id);
+  const id = parseInt(req.params.id);
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).send({
-            message: 'ID invalido'
-        });
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({
+      message: 'ID invalido',
+    });
+  }
+  const personagem = await PersonService.findByIdPerson(id);
 
-        const personagem = await PersonService.findByIdPerson(id);
+  if (!personagem) {
+    return res.status(206);
+  }
+};
 
-        if (!personagem) {
-            return res.status(206);
-        }
+const searchPersonController = async (req, res) => {
+  try {
+    const { message } = req.body;
+
+    const personagens = await PersonService.searchPersonService(message);
+
+    if (personagens.length === 0) {
+      return res
+        .status(400)
+        .send({ message: 'Não foi adicionado personagem com esse nome' });
     }
+
+    return res.send({
+      personagens: personagens.map((personagens) => ({
+        id: personagens._id,
+        nome: personagens.nome.length,
+        url: personagens.url.length
+      })),
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .send({ message: 'Erro ao criar/ tente novamente mais tarde!' });
+  }
 };
 
 module.exports = {
-    findAllPersonController,
-    findByIdPersonController,
-    createPerson,
-    updatePerson,
-    deletePerson,
+  findAllPersonController,
+  findByIdPersonController,
+  createPerson,
+  updatePerson,
+  deletePerson,
+  searchPersonController,
 };

@@ -11,6 +11,7 @@ const personagensRoute = require('./characters/personagens.Route')
 const port = process.env.PORT || 3001;
 
 const swaggerRoute = require('./swagger/swagger.route');
+
 const app = express();
 
 const authRoute = require('./auth/auth.route');

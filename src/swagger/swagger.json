@@ -7,8 +7,8 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3001/",
-      "description": "Url de teste"
+      "url": "https://dashboard.heroku.com/apps/personagens-rick-morty/",
+      "description": "API Global"
     }
   ],
   "paths": {
@@ -81,9 +81,48 @@
           }
         }
       }
+    },
+    "/auth/login":{
+      "post": {
+        "sumary": "Entrar",
+        "description": "Rota responsavel por fazer o login de um usuario cadastrado",
+        "tags": ["Auth"],
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "User": {
+                  "value": {
+                    "email": "lsantos@gmail.com",
+                    "password":"123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Algum campo obrigatorio não foi preenchido ou usuario existente"
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
     }
   },
   "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFrmat": "JWT"
+      }
+    },
     "schemas": {
       "User": {
         "type": "object",
